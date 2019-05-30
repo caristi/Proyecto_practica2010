@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="SIGACUN" Class="ConeccionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=CARLOSHUGO1\SQLEXPRESS;Initial Catalog=SIGACUN;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SIGACUNConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.archivohd" Member="archivohd">
+    <Type Name="archivohd">
+      <Column Name="arh_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="arh_nombre" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="arch_fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ahd_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="actividades_hd_archivohd" Member="actividades_hd" ThisKey="ahd_id" OtherKey="ahd_id" Type="actividades_hd" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.archivosact" Member="archivosact">
+    <Type Name="archivosact">
+      <Column Name="ara_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ara_nombre" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ara_fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="act_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="actividades_archivosact" Member="actividades" ThisKey="act_id" OtherKey="act_id" Type="actividades" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.archivosasig" Member="archivosasig">
+    <Type Name="archivosasig">
+      <Column Name="ars_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ars_nombre" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ars_fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="asi_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="asignaciones_archivosasig" Member="asignaciones" ThisKey="asi_id" OtherKey="asi_id" Type="asignaciones" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.archivospro" Member="archivospro">
+    <Type Name="archivospro">
+      <Column Name="arp_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="arp_nombre" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="arp_fechacrea" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="procedimiento_archivospro" Member="procedimiento" ThisKey="pro_id" OtherKey="pro_id" Type="procedimiento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cargos" Member="cargos">
+    <Type Name="cargos">
+      <Column Name="car_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="car_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="cargos_usuarios" Member="usuarios" ThisKey="car_id" OtherKey="car_id" Type="usuarios" />
+    </Type>
+  </Table>
+  <Table Name="dbo.estados" Member="estados">
+    <Type Name="estados">
+      <Column Name="est_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="est_descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="est_hd_estado" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="estados_actividades_hd" Member="actividades_hd" ThisKey="est_id" OtherKey="est_id" Type="actividades_hd" />
+      <Association Name="estados_asignaciones" Member="asignaciones" ThisKey="est_id" OtherKey="est_id" Type="asignaciones" />
+    </Type>
+  </Table>
+  <Table Name="dbo.procedimiento" Member="procedimiento">
+    <Type Name="procedimiento">
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pro_codigoun" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="pro_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="pro_describcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="pro_activo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="are_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="procedimiento_archivospro" Member="archivospro" ThisKey="pro_id" OtherKey="pro_id" Type="archivospro" />
+      <Association Name="procedimiento_actividades_hd" Member="actividades_hd" ThisKey="pro_id" OtherKey="pro_id" Type="actividades_hd" />
+      <Association Name="procedimiento_actividades" Member="actividades" ThisKey="pro_id" OtherKey="pro_id" Type="actividades" />
+      <Association Name="areas_procedimiento" Member="areas" ThisKey="are_id" OtherKey="are_id" Type="areas" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.actividades_hd" Member="actividades_hd">
+    <Type Name="actividades_hd">
+      <Column Name="ahd_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ahd_hd_numsolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ahd_bloque" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="ahd_piso" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="ahd_ubicacion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="ahd_descripcion" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ahd_fhpeticion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ahd_fhasignacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ahd_solicitante" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="ahd_fhfin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ahd_duracion" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="ahd_duratotal" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="ahd_comentario" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ahd_fhcomentario" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ahd_comsuper" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ahd_fhcomsuper" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="pri_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="est_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="actividades_hd_archivohd" Member="archivohd" ThisKey="ahd_id" OtherKey="ahd_id" Type="archivohd" />
+      <Association Name="actividades_hd_evaluacion" Member="evaluacion" ThisKey="ahd_id" OtherKey="ahd_id" Type="evaluacion" />
+      <Association Name="estados_actividades_hd" Member="estados" ThisKey="est_id" OtherKey="est_id" Type="estados" IsForeignKey="true" />
+      <Association Name="procedimiento_actividades_hd" Member="procedimiento" ThisKey="pro_id" OtherKey="pro_id" Type="procedimiento" IsForeignKey="true" />
+      <Association Name="prioridad_actividades_hd" Member="prioridad" ThisKey="pri_id" OtherKey="pri_id" Type="prioridad" IsForeignKey="true" />
+      <Association Name="usuarios_actividades_hd" Member="usuarios" ThisKey="usu_id" OtherKey="usu_id" Type="usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.prioridad" Member="prioridad">
+    <Type Name="prioridad">
+      <Column Name="pri_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="pri_nombre" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="pri_hd_prioridad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="prioridad_actividades_hd" Member="actividades_hd" ThisKey="pri_id" OtherKey="pri_id" Type="actividades_hd" />
+      <Association Name="prioridad_asignaciones" Member="asignaciones" ThisKey="pri_id" OtherKey="pri_id" Type="asignaciones" />
+    </Type>
+  </Table>
+  <Table Name="dbo.evaluacion" Member="evaluacion">
+    <Type Name="evaluacion">
+      <Column Name="eva_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="eva_observacion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ahd_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="epr_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="eva_calificacion" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Association Name="actividades_hd_evaluacion" Member="actividades_hd" ThisKey="ahd_id" OtherKey="ahd_id" Type="actividades_hd" IsForeignKey="true" />
+      <Association Name="evapreguntas_evaluacion" Member="evapreguntas" ThisKey="epr_id" OtherKey="epr_id" Type="evapreguntas" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.repeticiones" Member="repeticiones">
+    <Type Name="repeticiones">
+      <Column Name="rep_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rep_fechainicio" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="rep_fechafin" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="rep_cadacuando" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rep_cantidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="asi_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="asignaciones_repeticiones" Member="asignaciones" ThisKey="asi_id" OtherKey="asi_id" Type="asignaciones" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.actividades" Member="actividades">
+    <Type Name="actividades">
+      <Column Name="act_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="act_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="act_descripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="act_activo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="act_operacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="actividades_archivosact" Member="archivosact" ThisKey="act_id" OtherKey="act_id" Type="archivosact" />
+      <Association Name="actividades_asignaciones" Member="asignaciones" ThisKey="act_id" OtherKey="act_id" Type="asignaciones" />
+      <Association Name="procedimiento_actividades" Member="procedimiento" ThisKey="pro_id" OtherKey="pro_id" Type="procedimiento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.fechasfestivo" Member="fechasfestivo">
+    <Type Name="fechasfestivo">
+      <Column Name="fec_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fec_dia" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="fec_tipo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.roles" Member="roles">
+    <Type Name="roles">
+      <Column Name="rol_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rol_descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="roles_usuarios" Member="usuarios" ThisKey="rol_id" OtherKey="rol_id" Type="usuarios" />
+    </Type>
+  </Table>
+  <Table Name="dbo.usuarios" Member="usuarios">
+    <Type Name="usuarios">
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="usu_username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_contrasena" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_nombres" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_activo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="usu_hd_usuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="car_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="are_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rol_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="usuarios_actividades_hd" Member="actividades_hd" ThisKey="usu_id" OtherKey="usu_id" Type="actividades_hd" />
+      <Association Name="usuarios_asignaciones" Member="asignaciones" ThisKey="usu_id" OtherKey="use_id" Type="asignaciones" />
+      <Association Name="cargos_usuarios" Member="cargos" ThisKey="car_id" OtherKey="car_id" Type="cargos" IsForeignKey="true" />
+      <Association Name="roles_usuarios" Member="roles" ThisKey="rol_id" OtherKey="rol_id" Type="roles" IsForeignKey="true" />
+      <Association Name="areas_usuarios" Member="areas" ThisKey="are_id" OtherKey="are_id" Type="areas" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.areas" Member="areas">
+    <Type Name="areas">
+      <Column Name="are_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="are_nombre" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="are_hd_area" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="are_supervisor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="areas_procedimiento" Member="procedimiento" ThisKey="are_id" OtherKey="are_id" Type="procedimiento" />
+      <Association Name="areas_usuarios" Member="usuarios" ThisKey="are_id" OtherKey="are_id" Type="usuarios" />
+    </Type>
+  </Table>
+  <Table Name="dbo.asignaciones" Member="asignaciones">
+    <Type Name="asignaciones">
+      <Column Name="asi_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="asi_descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="asi_fhasignacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="asi_fechaterminar" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="asi_solicitante" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="asi_fhinicio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="asi_fhfin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="asi_comentario" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="asi_hfcomentario" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="asi_comsuper" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="asi_hfcomesuper" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="asi_operador" Type="System.Single" DbType="Real" CanBeNull="true" />
+      <Column Name="act_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="use_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pri_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="est_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="asignaciones_archivosasig" Member="archivosasig" ThisKey="asi_id" OtherKey="asi_id" Type="archivosasig" />
+      <Association Name="asignaciones_repeticiones" Member="repeticiones" ThisKey="asi_id" OtherKey="asi_id" Type="repeticiones" />
+      <Association Name="actividades_asignaciones" Member="actividades" ThisKey="act_id" OtherKey="act_id" Type="actividades" IsForeignKey="true" />
+      <Association Name="estados_asignaciones" Member="estados" ThisKey="est_id" OtherKey="est_id" Type="estados" IsForeignKey="true" />
+      <Association Name="prioridad_asignaciones" Member="prioridad" ThisKey="pri_id" OtherKey="pri_id" Type="prioridad" IsForeignKey="true" />
+      <Association Name="usuarios_asignaciones" Member="usuarios" ThisKey="use_id" OtherKey="usu_id" Type="usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.evapreguntas" Member="evapreguntas">
+    <Type Name="evapreguntas">
+      <Column Name="epr_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="epre_pregunta" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="evapreguntas_evaluacion" Member="evaluacion" ThisKey="epr_id" OtherKey="epr_id" Type="evaluacion" />
+    </Type>
+  </Table>
+  <Function Name="dbo.InsertarEvalucion" Method="InsertarEvalucion">
+    <Parameter Name="ahd_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="epr_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="calificacion" Type="System.Int32" DbType="Int" />
+    <Parameter Name="observacion" Type="System.String" DbType="Text" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

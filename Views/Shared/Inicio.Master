@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+<link rel="shortcut icon" href="../../Content/iconos/pc.ico" />
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+     <!-- CSS !-->
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" /> 
+</head>
+ <body>
+  <div class="wrapper1">
+	 <div class="wrapper">
+	
+	   <!-- CABEZA O TOP!-->
+	
+	    <div id="top">
+				<div class="rights"></div>
+				<div class="lefts">
+					<h1>SIGACun</h1>
+					<h2>Sistema de Gestion de Actividades, Centro de Cómputo Universidad Nacional</h2>
+				</div>
+	    </div>
+	    <!-- FIN O CABEZA O TOP!-->
+        <!-- CONTENIDO !-->
+		<div class="content">
+	        <div id="subheader">
+               <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+	        </div>
+		</div>
+		<!-- FIN CONTENIDO !-->
+		
+    </div>
+  </div>
+ </body>
+</html>
